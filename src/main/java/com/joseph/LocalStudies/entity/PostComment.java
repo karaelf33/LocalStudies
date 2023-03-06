@@ -11,15 +11,52 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 public class PostComment {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String review;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post postId;
+    @ManyToOne
+    private Post post;
 
     public PostComment() {
+    }
+
+
+    public PostComment(String review, Post post) {
+        this.review = review;
+        this.post = post;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    @Override
+    public String toString() {
+        return "PostComment{" +
+                "id=" + id +
+                ", review='" + review + '\'' +
+                '}';
     }
 }
